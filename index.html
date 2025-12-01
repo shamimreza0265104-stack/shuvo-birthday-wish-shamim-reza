@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Shuvo</title>
+    <style>
+        /* ফন্ট ইমপোর্ট */
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@600&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+        }
+
+        /* শুরুর বাটন স্টাইল */
+        #start-btn {
+            padding: 15px 40px;
+            font-size: 24px;
+            background: #ff007f;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            animation: pulse 2s infinite;
+            z-index: 10;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* মেইন কন্টেন্ট যা শুরুতে লুকানো থাকবে */
+        .card-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            z-index: 5;
+            position: relative;
+        }
+
+        /* ছবির স্টাইল */
+        .photo-frame {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 8px solid white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            overflow: hidden;
+            animation: popIn 1s ease-out;
+            background: white;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* টেক্সট স্টাইল */
+        h1 {
+            color: #fff;
+            font-family: 'Pacifico', cursive;
+            font-size: 3rem;
+            margin-top: 20px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            animation: slideUp 1.5s ease-out;
+        }
+
+        /* এনিমেশন ফ্রেম */
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            80% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            0% { transform: translateY(50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* কনফেটি (উপর থেকে যা পড়বে) */
+        .confetti {
+            position: absolute;
+            top: -10px;
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            animation: fall linear forwards;
+            opacity: 0.8;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(105vh) rotate(720deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- শুরুর বাটন -->
+    <button id="start-btn" onclick="startCelebration()">🎁 Click For Surprise!</button>
+
+    <!-- মেইন কন্টেন্ট -->
+    <div class="card-container" id="main-content">
+        <div class="photo-frame">
+            <!-- নিচের src এর জায়গায় আপনার ভাইয়ের ছবির লিংক দিবেন -->
+            <img src="https://i.postimg.cc/mkT57BVM/Picsart-25-12-01-14-11-53-792.jpg" alt="Shuvo's Photo" id="user-photo">
+        </div>
+        <h1>Happy Birthday <br> "Shuvo"</h1>
+    </div>
+
+    <!-- গান (লুকানো) -->
+    <!-- নিচের src এর জায়গায় গানের লিংক দিবেন -->
+    <audio id="bg-music" loop>
+        <source src="https://files.catbox.moe/v9dk1e.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        function startCelebration() {
+            // বাটন লুকানো
+            document.getElementById('start-btn').style.display = 'none';
+            
+            // মেইন কন্টেন্ট দেখানো
+            document.getElementById('main-content').style.display = 'flex';
+            
+            // গান বাজানো
+            var music = document.getElementById('bg-music');
+            music.volume = 0.5; // সাউন্ড ভলিউম
+            music.play();
+
+            // কনফেটি বা উপর থেকে পড়ার ইফেক্ট শুরু
+            startConfetti();
+        }
+
+        // ছবির লিংক সেট করা (যদি কোডে সরাসরি পরিবর্তন করতে না চান, এখানেও করতে পারেন)
+        // উদাহরণ: document.getElementById('user-photo').src = 'shuvo.jpg';
+        
+        // গানের লিংক পরিবর্তন করার জন্য HTML এর <audio> ট্যাগে src পরিবর্তন করুন।
+
+        function startConfetti() {
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+            
+            setInterval(() => {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                
+                // র‍্যান্ডম কালার এবং পজিশন
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDuration = Math.random() * 3 + 2 + 's'; // ২ থেকে ৫ সেকেন্ডের মধ্যে পড়বে
+                
+                document.body.appendChild(confetti);
+
+                // মেমোরি ক্লিয়ার করার জন্য এলিমেন্ট রিমুভ করা
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }, 100);
+        }
+    </script>
+</body>
+</html>
